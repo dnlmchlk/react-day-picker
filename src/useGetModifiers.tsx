@@ -1,14 +1,12 @@
 import { TZDate } from "@date-fns/tz";
 
-import { DayFlag } from "./UI.js";
+import { DayFlag, SelectionState } from "./UI.js";
 import type { CalendarDay, DateLib } from "./classes/index.js";
 import type { DayPickerProps, Modifiers } from "./types/index.js";
 import { dateMatchModifiers } from "./utils/dateMatchModifiers.js";
 
 /**
  * Return a function to get the modifiers for a given day.
- *
- * NOTE: this is not an hook, but a factory for `getModifiers`.
  *
  * @private
  */
@@ -30,6 +28,13 @@ export function useGetModifiers(
   };
 
   const customModifiersMap: Record<string, CalendarDay[]> = {};
+
+  const selectionModifiersMap: Record<SelectionState, CalendarDay[]> = {
+    [SelectionState.range_end]: [],
+    [SelectionState.range_middle]: [],
+    [SelectionState.range_start]: [],
+    [SelectionState.selected]: []
+  };
 
   for (const day of days) {
     const { date, displayMonth } = day;
@@ -76,7 +81,7 @@ export function useGetModifiers(
     }
   }
 
-  return (day: CalendarDay): Modifiers => {
+  return (day: CalendarDay) => {
     // Initialize all the modifiers to false
     const dayFlags: Record<DayFlag, boolean> = {
       [DayFlag.focused]: false,
@@ -85,6 +90,12 @@ export function useGetModifiers(
       [DayFlag.outside]: false,
       [DayFlag.today]: false
     };
+    const selectionStates: Record<SelectionState, boolean> = {
+      [SelectionState.range_end]: false,
+      [SelectionState.range_middle]: false,
+      [SelectionState.range_start]: false,
+      [SelectionState.selected]: false
+    };
     const customModifiers: Modifiers = {};
 
     // Find the modifiers for the given day
@@ -92,14 +103,19 @@ export function useGetModifiers(
       const days = internalModifiersMap[name as DayFlag];
       dayFlags[name as DayFlag] = days.some((d) => d === day);
     }
+    for (const name in selectionModifiersMap) {
+      const days = selectionModifiersMap[name as SelectionState];
+      selectionStates[name as SelectionState] = days.some((d) => d === day);
+    }
     for (const name in customModifiersMap) {
       customModifiers[name] = customModifiersMap[name].some((d) => d === day);
     }
 
     return {
+      ...selectionStates,
       ...dayFlags,
       // custom modifiers should override all the previous ones
       ...customModifiers
-    };
+    } as Modifiers;
   };
 }
