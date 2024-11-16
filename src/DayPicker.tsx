@@ -293,7 +293,14 @@ export function DayPicker(props: DayPickerProps) {
                 dateLib.startOfMonth(calendarMonth.date),
                 selectedMonth
               );
-              goToMonth(month);
+
+              if (navStart && month < dateLib.startOfMonth(navStart)) {
+                goToMonth(navStart);
+              } else if (navEnd && month > dateLib.startOfMonth(navEnd)) {
+                goToMonth(navEnd);
+              } else {
+                goToMonth(month);
+              }
             };
 
             const handleYearChange: ChangeEventHandler<HTMLSelectElement> = (
@@ -303,11 +310,20 @@ export function DayPicker(props: DayPickerProps) {
                 dateLib.startOfMonth(calendarMonth.date),
                 Number(e.target.value)
               );
-              goToMonth(month);
+              if (navStart && month < dateLib.startOfMonth(navStart)) {
+                goToMonth(navStart);
+              } else if (
+                month &&
+                navEnd &&
+                month > dateLib.startOfMonth(navEnd)
+              ) {
+                goToMonth(navEnd);
+              } else {
+                goToMonth(month);
+              }
             };
 
             const dropdownMonths = getMonthOptions(
-              calendarMonth.date,
               navStart,
               navEnd,
               formatters,
@@ -315,7 +331,6 @@ export function DayPicker(props: DayPickerProps) {
             );
 
             const dropdownYears = getYearOptions(
-              months[0].date,
               navStart,
               navEnd,
               formatters,

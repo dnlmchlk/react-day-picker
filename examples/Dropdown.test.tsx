@@ -1,7 +1,7 @@
 import React from "react";
 
 import { grid, monthDropdown, yearDropdown } from "@/test/elements";
-import { render, within } from "@/test/render";
+import { render } from "@/test/render";
 import { user } from "@/test/user";
 
 import { Dropdown } from "./Dropdown";
@@ -23,12 +23,6 @@ test("should display the year dropdown", () => {
   expect(yearDropdown()).toBeInTheDocument();
 });
 
-test("should disable the months out of range", () => {
-  expect(
-    within(monthDropdown()).getByRole("option", { name: "January" })
-  ).toBeDisabled();
-});
-
 describe("when choosing a month", () => {
   const monthName = "December";
   beforeEach(async () => {
@@ -36,11 +30,6 @@ describe("when choosing a month", () => {
   });
   test("should display the month", () => {
     expect(grid()).toHaveAccessibleName(`${monthName} 2024`);
-  });
-  test("should disable the years out of range", () => {
-    expect(
-      within(yearDropdown()).getByRole("option", { name: "2025" })
-    ).toBeDisabled();
   });
 });
 

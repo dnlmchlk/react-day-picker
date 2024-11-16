@@ -12,6 +12,9 @@ export type DropdownOption = {
   /**
    * The dropdown option is disabled when it cannot be selected because out of
    * the calendar range.
+   *
+   * @deprecated Since v9.3.1 this property is not used anymore.
+   * @see https://github.com/gpbl/react-day-picker/issues/2549)
    */
   disabled: boolean;
 };
@@ -50,8 +53,8 @@ export function Dropdown(
       className={classNames[UI.DropdownRoot]}
     >
       <components.Select className={cssClassSelect} {...selectProps}>
-        {options?.map(({ value, label, disabled }) => (
-          <components.Option key={value} value={value} disabled={disabled}>
+        {options?.map(({ value, label }) => (
+          <components.Option key={value} value={value}>
             {label}
           </components.Option>
         ))}
