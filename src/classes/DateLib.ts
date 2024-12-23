@@ -1,3 +1,4 @@
+import { TZDate } from "@date-fns/tz";
 import {
   DateArg,
   EndOfWeekOptions,
@@ -70,6 +71,7 @@ export interface DateLibOptions
   Date?: typeof Date;
   /** A locale to use for formatting dates. */
   locale?: Locale;
+  timeZone?: string;
 }
 
 /**
@@ -105,6 +107,12 @@ export class DateLib {
 
   /** Reference to the built-in Date constructor. */
   Date: typeof Date = Date;
+
+  /** Creates a new date object. */
+  today = (): Date => {
+    if (this.options.timeZone) return TZDate.tz(this.options.timeZone);
+    return new this.Date();
+  };
 
   /**
    * Adds the specified number of days to the given date.

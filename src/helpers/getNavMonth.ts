@@ -1,5 +1,3 @@
-import { TZDate } from "@date-fns/tz";
-
 import type { DateLib } from "../classes/DateLib.js";
 import type { DayPickerProps } from "../types/index.js";
 
@@ -52,9 +50,7 @@ export function getNavMonths(
   } else if (fromYear) {
     startMonth = new dateLib.Date(fromYear, 0, 1);
   } else if (!startMonth && hasDropdowns) {
-    const today =
-      props.today ??
-      (props.timeZone ? TZDate.tz(props.timeZone) : new dateLib.Date());
+    const today = dateLib.today();
     startMonth = startOfYear(addYears(today, -100));
   }
   if (endMonth) {
@@ -62,9 +58,7 @@ export function getNavMonths(
   } else if (toYear) {
     endMonth = new dateLib.Date(toYear, 11, 31);
   } else if (!endMonth && hasDropdowns) {
-    const today =
-      props.today ??
-      (props.timeZone ? TZDate.tz(props.timeZone) : new dateLib.Date());
+    const today = props.today ?? dateLib.today();
     endMonth = endOfYear(today);
   }
   return [
