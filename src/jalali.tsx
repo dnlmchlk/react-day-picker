@@ -7,11 +7,11 @@ import { DayPicker as DayPickerComponent } from "./index.js";
 import type { DayPickerProps } from "./types/props.js";
 
 export function DayPicker(
-  props: Omit<DayPickerProps, "dateLib"> & {
+  props: DayPickerProps & {
     /**
      * The locale to use in the calendar.
      *
-     * @default `faIR`
+     * @default `faIR` from `date-fns-jalali`
      */
     locale?: DayPickerProps["locale"];
     /**
@@ -20,26 +20,20 @@ export function DayPicker(
      * @default `rtl`
      */
     dir?: DayPickerProps["dir"];
+    /**
+     * The date library to use in the calendar.
+     *
+     * @default `jalaliDateLib` from `date-fns-jalali`
+     */
+    dateLib?: DayPickerProps["dateLib"];
   }
 ) {
-  const date = new Date();
-  const today = jalaliDateLib.newDate(
-    date.getFullYear(),
-    date.getMonth(),
-    date.getDate()
-  );
-  const dateLib = {
-    ...jalaliDateLib,
-    today: () => today
-  };
-  debugger;
   return (
-    // @ts-expect-error `dateLib` is added by this component
     <DayPickerComponent
       {...props}
-      locale={props.locale || faIR}
-      dir={props.dir || "rtl"}
-      dateLib={dateLib}
+      locale={props.locale ?? faIR}
+      dir={props.dir ?? "rtl"}
+      dateLib={props.dateLib ?? jalaliDateLib}
     />
   );
 }
