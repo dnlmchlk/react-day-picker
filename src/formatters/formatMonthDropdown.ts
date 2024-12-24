@@ -1,4 +1,4 @@
-import type { DateFnsMonth, Locale } from "../classes/DateLib.js";
+import type { DateFnsMonth, DateLib, Locale } from "../classes/DateLib.js";
 
 /**
  * Format the month number for the dropdown option label.
@@ -11,7 +11,13 @@ export function formatMonthDropdown(
   /** The month number to format. */
   monthNumber: number,
   /** The locale to use for formatting. */
-  locale: Locale
+  locale: Locale,
+  dateLib?: DateLib
 ): string {
-  return locale.localize?.month(monthNumber as DateFnsMonth);
+  if (!dateLib) {
+    return locale.localize?.month(monthNumber as DateFnsMonth);
+  }
+  return dateLib.format(new Date(2000, monthNumber, 1), "LLLL", {
+    locale
+  });
 }

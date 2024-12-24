@@ -105,13 +105,23 @@ export class DateLib {
     this.overrides = overrides;
   }
 
-  /** Reference to the built-in Date constructor. */
+  /**
+   * Reference to the built-in Date constructor.
+   *
+   * @deprecated Use `newDate()` or `today()`.
+   */
   Date: typeof Date = Date;
 
   /** Creates a new date object. */
   today = (): Date => {
     if (this.options.timeZone) return TZDate.tz(this.options.timeZone);
     return new this.Date();
+  };
+
+  newDate = (fullYear: number, monthIndex: number, date: number): Date => {
+    return this.overrides?.newDate
+      ? this.overrides.newDate(fullYear, monthIndex, date)
+      : new Date(fullYear, monthIndex, date);
   };
 
   /**

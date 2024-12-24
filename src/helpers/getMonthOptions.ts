@@ -28,9 +28,10 @@ export function getMonthOptions(
   const options = sortedMonths.map((value) => {
     const label = formatters.formatMonthDropdown(
       value,
-      dateLib.options.locale ?? defaultLocale
+      dateLib.options.locale ?? defaultLocale,
+      dateLib
     );
-    const month = new dateLib.Date(year, value);
+    const month = dateLib.newDate(year, value, 1);
     const disabled =
       (navStart && month < startOfMonth(navStart)) ||
       (navEnd && month > startOfMonth(navEnd)) ||

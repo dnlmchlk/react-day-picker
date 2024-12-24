@@ -23,7 +23,7 @@ export function getYearOptions(
   }
 
   return years.map((value) => {
-    const label = formatters.formatYearDropdown(value);
+    const label = formatters.formatYearDropdown(value, dateLib);
     return {
       value,
       label,
