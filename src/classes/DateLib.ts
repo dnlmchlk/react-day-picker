@@ -71,6 +71,7 @@ export interface DateLibOptions
   Date?: typeof Date;
   /** A locale to use for formatting dates. */
   locale?: Locale;
+  /** A time zone to use for dates. */
   timeZone?: string;
 }
 
@@ -112,16 +113,34 @@ export class DateLib {
    */
   Date: typeof Date = Date;
 
-  /** Creates a new date object. */
+  /**
+   * Creates a new date object to the today's date.
+   *
+   * @since 9.5.0
+   */
   today = (): Date => {
-    if (this.options.timeZone) return TZDate.tz(this.options.timeZone);
+    if (this.overrides?.today) {
+      return this.overrides.today();
+    }
+    if (this.options.timeZone) {
+      return TZDate.tz(this.options.timeZone);
+    }
     return new this.Date();
   };
 
-  newDate = (fullYear: number, monthIndex: number, date: number): Date => {
-    return this.overrides?.newDate
-      ? this.overrides.newDate(fullYear, monthIndex, date)
-      : new Date(fullYear, monthIndex, date);
+  /**
+   * Creates a new date object with the specified year, month and date.
+   *
+   * @since 9.5.0
+   */
+  newDate = (year: number, monthIndex: number, date: number): Date => {
+    if (this.overrides?.newDate) {
+      return this.overrides.newDate(year, monthIndex, date);
+    }
+    if (this.options.timeZone) {
+      return new TZDate(year, monthIndex, date, this.options.timeZone);
+    }
+    return new Date(year, monthIndex, date);
   };
 
   /**
