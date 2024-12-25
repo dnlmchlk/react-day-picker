@@ -12,26 +12,27 @@ export function getMonthOptions(
 ): DropdownOption[] | undefined {
   if (!navStart) return undefined;
   if (!navEnd) return undefined;
+  // const year = dateLib.getYear(displayMonth);
+  const {
+    startOfMonth,
+    startOfYear,
+    endOfYear,
+    eachMonthOfInterval,
+    getMonth
+  } = dateLib;
 
-  const { addMonths, startOfMonth } = dateLib;
-  const year = displayMonth.getFullYear();
-
-  const months: number[] = [];
-  let month = navStart;
-  while (months.length < 12) {
-    months.push(month.getMonth());
-    month = addMonths(month, 1);
-  }
-  const sortedMonths = months.sort((a, b) => {
-    return a - b;
+  const months = eachMonthOfInterval({
+    start: startOfYear(displayMonth),
+    end: endOfYear(displayMonth)
   });
-  const options = sortedMonths.map((value) => {
+
+  const options = months.map((month) => {
     const label = formatters.formatMonthDropdown(
-      value,
+      month,
       dateLib.options.locale ?? defaultLocale,
       dateLib
     );
-    const month = dateLib.newDate(year, value, 1);
+    const value = getMonth(month);
     const disabled =
       (navStart && month < startOfMonth(navStart)) ||
       (navEnd && month > startOfMonth(navEnd)) ||

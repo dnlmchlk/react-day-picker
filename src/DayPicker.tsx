@@ -337,21 +337,23 @@ export function DayPicker(props: DayPickerProps) {
                     >
                       {captionLayout === "dropdown" ||
                       captionLayout === "dropdown-months" ? (
-                        <components.MonthsDropdown
-                          className={classNames[UI.MonthsDropdown]}
-                          aria-label={labelMonthDropdown()}
-                          classNames={classNames}
-                          components={components}
-                          disabled={Boolean(props.disableNavigation)}
-                          onChange={handleMonthChange(calendarMonth.date)}
-                          options={dropdownMonths}
-                          style={styles?.[UI.Dropdown]}
-                          value={calendarMonth.date.getMonth()}
-                        />
+                        <>
+                          <components.MonthsDropdown
+                            className={classNames[UI.MonthsDropdown]}
+                            aria-label={labelMonthDropdown()}
+                            classNames={classNames}
+                            components={components}
+                            disabled={Boolean(props.disableNavigation)}
+                            onChange={handleMonthChange(calendarMonth.date)}
+                            options={dropdownMonths}
+                            style={styles?.[UI.Dropdown]}
+                            value={dateLib.getMonth(calendarMonth.date)}
+                          />
+                        </>
                       ) : (
                         <span role="status" aria-live="polite">
                           {formatMonthDropdown(
-                            calendarMonth.date.getMonth(),
+                            calendarMonth.date,
                             locale,
                             dateLib
                           )}
@@ -359,23 +361,22 @@ export function DayPicker(props: DayPickerProps) {
                       )}
                       {captionLayout === "dropdown" ||
                       captionLayout === "dropdown-years" ? (
-                        <components.YearsDropdown
-                          className={classNames[UI.YearsDropdown]}
-                          aria-label={labelYearDropdown(dateLib.options)}
-                          classNames={classNames}
-                          components={components}
-                          disabled={Boolean(props.disableNavigation)}
-                          onChange={handleYearChange(calendarMonth.date)}
-                          options={dropdownYears}
-                          style={styles?.[UI.Dropdown]}
-                          value={calendarMonth.date.getFullYear()}
-                        />
+                        <>
+                          <components.YearsDropdown
+                            className={classNames[UI.YearsDropdown]}
+                            aria-label={labelYearDropdown(dateLib.options)}
+                            classNames={classNames}
+                            components={components}
+                            disabled={Boolean(props.disableNavigation)}
+                            onChange={handleYearChange(calendarMonth.date)}
+                            options={dropdownYears}
+                            style={styles?.[UI.Dropdown]}
+                            value={dateLib.getYear(calendarMonth.date)}
+                          />
+                        </>
                       ) : (
                         <span role="status" aria-live="polite">
-                          {formatYearDropdown(
-                            calendarMonth.date.getFullYear(),
-                            dateLib
-                          )}
+                          {formatYearDropdown(calendarMonth.date, dateLib)}
                         </span>
                       )}
                     </components.DropdownNav>

@@ -31,7 +31,10 @@ import {
   startOfISOWeek,
   startOfMonth,
   startOfWeek,
-  startOfYear
+  startOfYear,
+  getMonth,
+  eachMonthOfInterval,
+  getYear
 } from "date-fns";
 import type { Locale } from "date-fns/locale";
 import { enUS } from "date-fns/locale";
@@ -227,6 +230,12 @@ export class DateLib {
       : differenceInCalendarMonths(dateLeft, dateRight);
   };
 
+  eachMonthOfInterval: typeof eachMonthOfInterval = (interval) => {
+    return this.overrides?.eachMonthOfInterval
+      ? this.overrides.eachMonthOfInterval(interval)
+      : eachMonthOfInterval(interval);
+  };
+
   /**
    * Returns the end of the broadcast week for the given date.
    *
@@ -318,6 +327,18 @@ export class DateLib {
     return this.overrides?.getISOWeek
       ? this.overrides.getISOWeek(date)
       : getISOWeek(date);
+  };
+
+  getMonth: typeof getMonth = (date) => {
+    return this.overrides?.getMonth
+      ? this.overrides.getMonth(date, this.options)
+      : getMonth(date, this.options);
+  };
+
+  getYear: typeof getYear = (date) => {
+    return this.overrides?.getYear
+      ? this.overrides.getYear(date, this.options)
+      : getYear(date, this.options);
   };
 
   /**

@@ -26,7 +26,9 @@ export function getNavMonths(
     startOfMonth,
     endOfMonth,
     addYears,
-    endOfYear
+    endOfYear,
+    newDate,
+    today
   } = dateLib;
 
   // Handle deprecated code
@@ -41,26 +43,23 @@ export function getNavMonths(
     endMonth = toMonth;
   }
   if (!endMonth && toYear) {
-    endMonth = dateLib.newDate(toYear, 11, 31);
+    endMonth = newDate(toYear, 11, 31);
   }
 
   const hasDropdowns = props.captionLayout?.startsWith("dropdown");
   if (startMonth) {
     startMonth = startOfMonth(startMonth);
   } else if (fromYear) {
-    startMonth = dateLib.newDate(fromYear, 0, 1);
+    startMonth = newDate(fromYear, 0, 1);
   } else if (!startMonth && hasDropdowns) {
-    const today = dateLib.today();
-    console.info({ today });
-    startMonth = startOfYear(addYears(today, -100));
+    startMonth = startOfYear(addYears(props.today ?? today(), -100));
   }
   if (endMonth) {
     endMonth = endOfMonth(endMonth);
   } else if (toYear) {
-    endMonth = dateLib.newDate(toYear, 11, 31);
+    endMonth = newDate(toYear, 11, 31);
   } else if (!endMonth && hasDropdowns) {
-    const today = props.today ?? dateLib.today();
-    endMonth = endOfYear(today);
+    endMonth = endOfYear(props.today ?? today());
   }
   return [
     startMonth ? startOfDay(startMonth) : startMonth,

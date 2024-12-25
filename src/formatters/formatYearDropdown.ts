@@ -7,9 +7,12 @@ import type { DateLib } from "../classes/DateLib.js";
  * @group Formatters
  * @see https://daypicker.dev/docs/translation#custom-formatters
  */
-export function formatYearDropdown(year: number, dateLib?: DateLib): string {
-  if (!dateLib) return year.toString();
-  return dateLib.format(new Date(year, 0, 1), "yyyy");
+export function formatYearDropdown(
+  year: number | Date,
+  dateLib?: DateLib
+): string {
+  if (!dateLib || typeof year === "number") return year.toString();
+  return dateLib.format(year, "yyyy");
 }
 
 /**
