@@ -1,4 +1,4 @@
-import { defaultLocale, type DateLib } from "../classes/DateLib.js";
+import { type DateLib } from "../classes/DateLib.js";
 import { DropdownOption } from "../components/Dropdown.js";
 import type { Formatters } from "../types/index.js";
 
@@ -27,11 +27,7 @@ export function getMonthOptions(
   });
 
   const options = months.map((month) => {
-    const label = formatters.formatMonthDropdown(
-      month,
-      dateLib.options.locale ?? defaultLocale,
-      dateLib
-    );
+    const label = formatters.formatMonthDropdown(month, dateLib);
     const value = getMonth(month);
     const disabled =
       (navStart && month < startOfMonth(navStart)) ||

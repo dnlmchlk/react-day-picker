@@ -352,11 +352,7 @@ export function DayPicker(props: DayPickerProps) {
                         </>
                       ) : (
                         <span role="status" aria-live="polite">
-                          {formatMonthDropdown(
-                            calendarMonth.date,
-                            locale,
-                            dateLib
-                          )}
+                          {formatMonthDropdown(calendarMonth.date, dateLib)}
                         </span>
                       )}
                       {captionLayout === "dropdown" ||
