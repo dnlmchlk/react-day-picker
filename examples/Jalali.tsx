@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DayPicker, dateLib } from "react-day-picker/jalali";
+import { DayPicker, jalaliDateLib } from "react-day-picker/jalali";
 
 export function Jalali() {
   const [selected, setSelected] = React.useState(new Date());
@@ -10,7 +10,7 @@ export function Jalali() {
       selected={selected}
       required
       onSelect={setSelected}
-      footer={`Selected: ${dateLib.format(selected, "yyyy/MM/dd")}`}
+      footer={`Selected: ${jalaliDateLib.format(selected, "yyyy/MM/dd")}`}
     />
   );
 }
