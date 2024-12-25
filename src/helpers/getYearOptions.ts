@@ -15,18 +15,18 @@ export function getYearOptions(
     dateLib;
   const firstNavYear = startOfYear(navStart);
   const lastNavYear = endOfYear(navEnd);
-  const years: number[] = [];
+  const years: Date[] = [];
 
   let year = firstNavYear;
   while (isBefore(year, lastNavYear) || isSameYear(year, lastNavYear)) {
-    years.push(getYear(year));
+    years.push(year);
     year = addYears(year, 1);
   }
 
-  return years.map((value) => {
-    const label = formatters.formatYearDropdown(value, dateLib);
+  return years.map((year) => {
+    const label = formatters.formatYearDropdown(year, dateLib);
     return {
-      value,
+      value: getYear(year),
       label,
       disabled: false
     };

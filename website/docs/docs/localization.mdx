@@ -121,16 +121,25 @@ To use the Jalali calendar, import `DayPicker` from `react-day-picker/jalali`:
 + import { DayPicker } from 'react-day-picker/jalali';
 ```
 
-By defaults, Jalali DayPicker uses the Persian/Farsi locale (Iran) and a `dir` from right to left.
+By defaults, Jalali DayPicker uses the Persian/Farsi locale (Iran) and a `dir` from right to left. This calendar returns regular dates. Use the exported `jalaliDateLib` object to format dates to Jalali.
 
 ```tsx title="./JalaliCalendar.jsx"
-import { DayPicker } from "react-day-picker/jalali";
+import { DayPicker, jalaliDateLib } from "react-day-picker/jalali";
 
-export function Jalali() {
-  return <DayPicker mode="single" />;
+export function JalaliCalendar() {
+  const [selected, setSelected] = React.useState(new Date());
+  return (
+    <DayPicker
+      mode="single"
+      selected={selected}
+      required
+      onSelect={setSelected}
+      footer={`Selected: ${jalaliDateLib.format(selected, "yyyy/MM/dd")}`}
+    />
+  );
 }
-```
 
 <BrowserWindow>
   <Examples.Jalali />
-</BrowserWindow>
+</BrowserWindow>;
+```

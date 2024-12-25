@@ -3,11 +3,12 @@ import React from "react";
 import Head from "@docusaurus/Head";
 import Layout from "@theme/Layout";
 import {
-  DateRange,
+  type DateRange,
+  type DayPickerProps,
   DayPicker,
-  DayPickerProps,
   isDateRange
 } from "react-day-picker";
+import { DayPicker as DayPickerPersian } from "react-day-picker/jalali";
 import * as locales from "react-day-picker/locale";
 
 import { BrowserWindow } from "../components/BrowserWindow";
@@ -22,6 +23,8 @@ const timeZones = [
   "Asia/Tokyo",
   "Australia/Sydney"
 ];
+
+const calendars = ["Gregorian", "Persian"];
 /**
  * Function to format a json object of props to a jsx source displaying the
  * props as example
@@ -60,14 +63,30 @@ export default function Playground() {
   >();
 
   const [accentColor, setAccentColor] = React.useState<string>();
+  const [calendar, setCalendar] = React.useState(calendars[0]);
+
   const [backgroundAccentColor, setBackgroundAccountColor] =
     React.useState<string>();
-  const [rangeMiddleColor, setrangeMiddleColor] = React.useState<string>();
+  const [rangeMiddleColor, setRangeMiddleColor] = React.useState<string>();
 
-  const formattedProps = `<DayPicker${toJSX({ ...props, locale: undefined })} \n/>`;
+  let formattedProps = `<DayPicker${toJSX({
+    ...props,
+    locale: undefined,
+    dir: calendar === "Persian" && props.dir === "rtl" ? undefined : props.dir
+  })} \n/>`;
 
+  if (calendar === "Persian") {
+    formattedProps =
+      `import { DayPicker } from "react-day-picker/jalali";\n\n` +
+      formattedProps;
+  } else {
+    formattedProps =
+      `import { DayPicker } from "react-day-picker";\n\n` + formattedProps;
+  }
   const currentTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
+  const DayPickerComponent =
+    calendar === "Persian" ? DayPickerPersian : DayPicker;
   return (
     <Layout>
       <Head>
@@ -338,7 +357,7 @@ export default function Playground() {
                     <input
                       value={rangeMiddleColor ?? ""}
                       type="color"
-                      onChange={(e) => setrangeMiddleColor(e.target.value)}
+                      onChange={(e) => setRangeMiddleColor(e.target.value)}
                     />
                   </label>
                 </>
@@ -392,10 +411,30 @@ export default function Playground() {
                 </select>
               </label>
               <label>
+                Calendar:
+                <select
+                  name="calendar"
+                  value={calendar}
+                  onChange={(e) => {
+                    setProps({
+                      ...props,
+                      dir: e.target.value === "Persian" ? "rtl" : "ltr"
+                    });
+                    setCalendar(e.target.value);
+                  }}
+                >
+                  {calendars.map((calendar) => (
+                    <option key={calendar} value={calendar}>
+                      {calendar}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
                 Weeks starts on:
                 <select
                   name="weekStartsOn"
-                  disabled={props.broadcastCalendar}
+                  disabled={props.broadcastCalendar || props.ISOWeek}
                   value={props.weekStartsOn}
                   onChange={(e) =>
                     setProps({
@@ -421,6 +460,7 @@ export default function Playground() {
               <label>
                 First week contains:
                 <select
+                  disabled={props.broadcastCalendar || props.ISOWeek}
                   name="firstWeekContainsDate"
                   onChange={(e) =>
                     setProps({
@@ -451,6 +491,7 @@ export default function Playground() {
                 <input
                   type="checkbox"
                   name="rtl"
+                  checked={props.dir === "rtl"}
                   onChange={(e) =>
                     setProps({
                       ...props,
@@ -475,19 +516,17 @@ export default function Playground() {
                     })
                   }
                 />
-                Broadcast Calendar
+                Broadcast Weeks
               </label>
             </div>
           </fieldset>
         </form>
         <div className={styles.browserWindow}>
           <BrowserWindow url="">
-            <DayPicker
+            <DayPickerComponent
               {...props}
               onSelect={setSelected}
-              // @ts-expect-error abc
               selected={selected}
-              // timeZone="Europe/Athens"
             />
           </BrowserWindow>
         </div>

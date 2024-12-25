@@ -1,22 +1,24 @@
 import { TZDate } from "@date-fns/tz";
 import {
-  DateArg,
-  EndOfWeekOptions,
-  FormatOptions as DateFnsFormatOptions,
-  StartOfWeekOptions,
   addDays,
   addMonths,
   addWeeks,
   addYears,
+  DateArg,
   differenceInCalendarDays,
   differenceInCalendarMonths,
+  eachMonthOfInterval,
   endOfISOWeek,
   endOfMonth,
   endOfWeek,
+  EndOfWeekOptions,
   endOfYear,
   format,
+  FormatOptions as DateFnsFormatOptions,
   getISOWeek,
+  getMonth,
   getWeek,
+  getYear,
   isAfter,
   isBefore,
   isDate,
@@ -31,10 +33,8 @@ import {
   startOfISOWeek,
   startOfMonth,
   startOfWeek,
-  startOfYear,
-  getMonth,
-  eachMonthOfInterval,
-  getYear
+  StartOfWeekOptions,
+  startOfYear
 } from "date-fns";
 import type { Locale } from "date-fns/locale";
 import { enUS } from "date-fns/locale";
@@ -311,10 +311,10 @@ export class DateLib {
    * @param formatStr The format string.
    * @returns The formatted date string.
    */
-  format: typeof format = (date, formatStr) => {
+  format: typeof format = (date, formatStr, options) => {
     return this.overrides?.format
-      ? this.overrides.format(date, formatStr, this.options)
-      : format(date, formatStr, this.options);
+      ? this.overrides.format(date, formatStr, { ...this.options, ...options })
+      : format(date, formatStr, { ...this.options, ...options });
   };
 
   /**

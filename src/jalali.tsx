@@ -1,6 +1,6 @@
 import React from "react";
 
-import * as jalaliDateLib from "date-fns-jalali";
+import * as dateFnsJalali from "date-fns-jalali";
 import { faIR } from "date-fns-jalali/locale";
 
 import { DayPicker as DayPickerComponent } from "./index.js";
@@ -31,9 +31,12 @@ export function DayPicker(
   return (
     <DayPickerComponent
       {...props}
-      locale={props.locale ?? faIR}
+      locale={faIR}
       dir={props.dir ?? "rtl"}
-      dateLib={props.dateLib ?? jalaliDateLib}
+      dateLib={props.dateLib ?? dateFnsJalali}
     />
   );
 }
+
+/** The jalali date library used in the calendar. */
+export const jalaliDateLib = dateFnsJalali;
