@@ -142,8 +142,8 @@ export function DayPicker(props: DayPickerProps) {
   } = labels;
 
   const weekdays = useMemo(
-    () => getWeekdays(dateLib, props.ISOWeek),
-    [dateLib, props.ISOWeek]
+    () => getWeekdays(dateLib, props.ISOWeek, props.broadcastCalendar),
+    [dateLib, props.ISOWeek, props.broadcastCalendar]
   );
 
   const isInteractive = mode !== undefined || onDayClick !== undefined;
