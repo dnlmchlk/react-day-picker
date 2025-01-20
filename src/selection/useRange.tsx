@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 
 import type { DateLib } from "../classes/DateLib.js";
 import { useControlledValue } from "../helpers/useControlledValue.js";

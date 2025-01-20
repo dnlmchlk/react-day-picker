@@ -6,7 +6,7 @@ import {
   startOfMonth,
   startOfYear
 } from "date-fns";
-import { DayPickerProps } from "react-day-picker/types";
+import type { DayPickerProps } from "react-day-picker/types";
 
 import { defaultDateLib } from "../classes/DateLib";
 

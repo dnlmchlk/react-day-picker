@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 
 import type { DeprecatedUI } from "../UI.js";
 import type { Locale, DateLib } from "../classes/DateLib.js";

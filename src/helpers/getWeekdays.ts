@@ -1,4 +1,4 @@
-import { DateLib } from "../classes/DateLib.js";
+import type { DateLib } from "../classes/DateLib.js";
 
 /**
  * Generate a series of 7 days, starting from the week, to use for formatting

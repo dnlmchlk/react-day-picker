@@ -3,7 +3,7 @@ import { useMulti } from "./selection/useMulti.js";
 import { useRange } from "./selection/useRange.js";
 import { useSingle } from "./selection/useSingle.js";
 import type { DayPickerProps } from "./types/index.js";
-import { Selection } from "./types/selection.js";
+import type { Selection } from "./types/selection.js";
 
 export function useSelection<T extends DayPickerProps>(
   props: T,

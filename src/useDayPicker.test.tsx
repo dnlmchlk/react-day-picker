@@ -3,12 +3,13 @@ import React from "react";
 import { renderHook } from "@testing-library/react";
 
 import { DayFlag, SelectionState, UI } from "./UI";
-import { CalendarDay } from "./classes/CalendarDay";
+import type { CalendarDay } from "./classes/CalendarDay";
 import { CalendarMonth } from "./classes/CalendarMonth";
-import { DayPickerProps } from "./types/props";
-import { Modifiers } from "./types/shared";
+import type { DayPickerProps } from "./types/props";
+import type { Modifiers } from "./types/shared";
+import type {
+  DayPickerContext} from "./useDayPicker";
 import {
-  DayPickerContext,
   dayPickerContext,
   useDayPicker
 } from "./useDayPicker";

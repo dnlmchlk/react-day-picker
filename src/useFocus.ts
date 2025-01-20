@@ -9,7 +9,7 @@ import type {
   DayPickerProps,
   Modifiers
 } from "./types/index.js";
-import { Calendar } from "./useCalendar.js";
+import type { Calendar } from "./useCalendar.js";
 
 export type UseFocus = {
   /** The date that is currently focused. */

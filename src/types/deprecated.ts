@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { DayFlag, SelectionState } from "../UI.js";
+import type { DayFlag, SelectionState } from "../UI.js";
 import {
   MonthCaption,
   type MonthCaptionProps
 } from "../components/MonthCaption.js";
 import { Week, type WeekProps } from "../components/Week.js";
-import {
+import type {
   labelDayButton,
   labelNext,
   labelWeekday,

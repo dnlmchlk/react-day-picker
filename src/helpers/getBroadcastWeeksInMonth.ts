@@ -1,4 +1,4 @@
-import { DateLib } from "../classes/index.js";
+import type { DateLib } from "../classes/index.js";
 
 const FIVE_WEEKS = 5;
 const FOUR_WEEKS = 4;

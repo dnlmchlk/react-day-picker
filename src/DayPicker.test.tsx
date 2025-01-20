@@ -14,8 +14,8 @@ import { user } from "@/test/user";
 
 import { DayPicker } from "./DayPicker";
 import { defaultLocale } from "./classes/DateLib";
-import { MonthProps } from "./components/Month";
-import { MonthsProps } from "./components/Months";
+import type { MonthProps } from "./components/Month";
+import type { MonthsProps } from "./components/Months";
 
 const testId = "test";
 const dayPicker = () => screen.getByTestId(testId);

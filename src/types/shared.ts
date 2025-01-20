@@ -1,8 +1,8 @@
 import type { CSSProperties } from "react";
 
-import { UI, DayFlag, SelectionState } from "../UI.js";
-import * as components from "../components/custom-components.js";
-import {
+import type { UI, DayFlag, SelectionState } from "../UI.js";
+import type * as components from "../components/custom-components.js";
+import type {
   formatCaption,
   formatDay,
   formatMonthCaption,
@@ -13,7 +13,7 @@ import {
   formatYearCaption,
   formatYearDropdown
 } from "../formatters/index.js";
-import {
+import type {
   labelDayButton,
   labelNav,
   labelGrid,

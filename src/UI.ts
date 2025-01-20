@@ -1,6 +1,4 @@
-import { CSSProperties } from "react";
-
-import type { CustomComponents, ClassNames, Styles } from "./types/index.js";
+import type { CSSProperties } from "react";
 
 /**
  * The UI elements composing DayPicker. These elements are mapped to

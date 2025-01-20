@@ -1,5 +1,5 @@
 import { defaultDateLib } from "../classes/DateLib";
-import { DayOfWeek } from "../types";
+import type { DayOfWeek } from "../types";
 
 import { rangeContainsModifiers } from "./rangeContainsModifiers";
 

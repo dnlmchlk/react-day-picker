@@ -1,10 +1,10 @@
 import { createContext, useContext } from "react";
 
-import { CalendarDay } from "./classes/CalendarDay.js";
-import { CalendarMonth } from "./classes/CalendarMonth.js";
-import { DayPickerProps } from "./types/props.js";
+import type { CalendarDay } from "./classes/CalendarDay.js";
+import type { CalendarMonth } from "./classes/CalendarMonth.js";
+import type { DayPickerProps } from "./types/props.js";
 import type { SelectedValue, SelectHandler } from "./types/selection.js";
-import {
+import type {
   ClassNames,
   CustomComponents,
   Formatters,

@@ -2,7 +2,7 @@ import React from "react";
 
 import { DayPicker } from "../DayPicker";
 
-import { DateRange } from "./shared";
+import type { DateRange } from "./shared";
 
 const Test = () => {
   return (
