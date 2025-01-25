@@ -1,11 +1,14 @@
-import { ChangeEventHandler, useState } from "react";
+import type { ChangeEventHandler} from "react";
+import { useState } from "react";
 
 import { format, isAfter, isBefore, isValid, parse } from "date-fns";
 
-import {
+import type {
   DateRange,
-  DayPicker,
   SelectRangeEventHandler
+} from "./react-day-picker-v8";
+import {
+  DayPicker
 } from "./react-day-picker-v8";
 
 export function InputRange() {

@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 
-import { CaptionProps, DayPicker, useNavigation } from "./react-day-picker-v8";
+import type { CaptionProps} from "./react-day-picker-v8";
+import { DayPicker, useNavigation } from "./react-day-picker-v8";
 
 function CustomMonthCaption(props: CaptionProps) {
   const { goToMonth, nextMonth, previousMonth } = useNavigation();

@@ -2,11 +2,12 @@ import React from "react";
 
 import { isSameDay } from "date-fns";
 
+import type {
+  DateRange,
+  DayProps} from "./react-day-picker-v8";
 import {
   Button,
-  DateRange,
   DayPicker,
-  DayProps,
   useDayRender
 } from "./react-day-picker-v8";
 

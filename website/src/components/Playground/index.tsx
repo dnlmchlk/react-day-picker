@@ -1,13 +1,13 @@
 import React from "react";
 
 import { startOfMonth } from "date-fns";
+import type { Numerals } from "react-day-picker";
 import {
   type DateRange,
   type DayPickerProps,
   DateLib,
   DayPicker,
-  isDateRange,
-  Numerals
+  isDateRange
 } from "react-day-picker";
 import * as locales from "react-day-picker/locale";
 import {

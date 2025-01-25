@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-import { DayPicker, DayPickerProps } from "./react-day-picker-v8";
+import type { DayPickerProps } from "./react-day-picker-v8";
+import { DayPicker } from "./react-day-picker-v8";
 
 export function CustomSingle() {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>();

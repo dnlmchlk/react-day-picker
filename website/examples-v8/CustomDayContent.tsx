@@ -1,4 +1,5 @@
-import { DayContentProps, DayPicker } from "./react-day-picker-v8";
+import type { DayContentProps } from "./react-day-picker-v8";
+import { DayPicker } from "./react-day-picker-v8";
 
 function DayContent(props: DayContentProps) {
   return (
