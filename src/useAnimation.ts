@@ -9,13 +9,13 @@ import { ClassNames } from "./types/shared.js";
 
 /** @private */
 export function useAnimation(
+  rootElRef: React.RefObject<HTMLDivElement | null>,
   props: Pick<DayPickerProps, "animate">,
   classNames: ClassNames,
   months: CalendarMonth[],
   focused: CalendarDay | undefined,
   dateLib: DateLib
 ) {
-  const rootElRef = useRef<HTMLDivElement>(null);
   const previousRootElSnapshotRef = useRef<HTMLElement>(null);
   const previousMonthsRef = useRef(months);
   const animatingRef = useRef(false);
@@ -196,6 +196,4 @@ export function useAnimation(
       });
     }
   });
-
-  return { rootElRef };
 }

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useRef } from "react";
 import type { MouseEvent, FocusEvent, KeyboardEvent, ChangeEvent } from "react";
 
 import { UI, DayFlag, SelectionState } from "./UI.js";
@@ -132,6 +132,8 @@ export function DayPicker(props: DayPickerProps) {
     dateLib
   );
 
+  const rootElRef = useRef<HTMLDivElement>(null);
+
   const {
     labelDayButton,
     labelGridcell,
@@ -257,13 +259,7 @@ export function DayPicker(props: DayPickerProps) {
 
   const dataAttributes = getDataAttributes(props);
 
-  const { rootElRef } = useAnimation(
-    props,
-    classNames,
-    months,
-    focused,
-    dateLib
-  );
+  useAnimation(rootElRef, props, classNames, months, focused, dateLib);
 
   const contextValue: DayPickerContext<DayPickerProps> = {
     dayPickerProps: props,
