@@ -100,24 +100,24 @@ export enum SelectionState {
   selected = "selected"
 }
 
-/** CSS classes used for animating months and captions. */
+/** CSS classes used for animating weeks and captions. */
 export enum Animation {
-  /** Applied to the entering month when it is after the exiting month. */
-  animation_enter_month_weeks_is_after = "animation_enter_month_weeks_is_after",
-  /** Applied to the exiting month when it is before the entering month. */
-  animation_exit_month_weeks_is_before = "animation_exit_month_weeks_is_before",
-  /** Applied to the entering month when it is before the exiting month. */
-  animation_enter_month_weeks_is_before = "animation_enter_month_weeks_is_before",
-  /** Applied to the exiting month when it is after the entering month. */
-  animation_exit_month_weeks_is_after = "animation_exit_month_weeks_is_after",
-  /** Applied to the entering month caption when it is after the exiting month. */
-  animation_enter_month_caption_is_after = "animation_enter_month_caption_is_after",
-  /** Applied to the exiting month caption when it is before the entering month. */
-  animation_exit_month_caption_is_before = "animation_exit_month_caption_is_before",
-  /** Applied to the entering month caption when it is before the exiting month. */
-  animation_enter_month_caption_is_before = "animation_enter_month_caption_is_before",
-  /** Applied to the exiting month caption when it is after the entering month. */
-  animation_exit_month_caption_is_after = "animation_exit_month_caption_is_after"
+  /** Applied to the weeks when the previous month is exiting. */
+  weeks_prev_out = "weeks_prev_out",
+  /** Applied to the weeks when the previous month is entering. */
+  weeks_prev_in = "weeks_prev_in",
+  /** Applied to the weeks when the next month is entering. */
+  weeks_next_in = "weeks_next_in",
+  /** Applied to the weeks when the next month is exiting. */
+  weeks_next_out = "weeks_next_out",
+  /** Applied to the month caption when the next month is entering. */
+  caption_next_in = "caption_next_in",
+  /** Applied to the month caption when the next month is exiting. */
+  caption_next_out = "caption_next_out",
+  /** Applied to the month caption when the previous month is entering. */
+  caption_prev_in = "caption_prev_in",
+  /** Applied to the month caption when the previous month is exiting. */
+  caption_prev_out = "caption_prev_out"
 }
 
 /**

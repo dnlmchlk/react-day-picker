@@ -45,11 +45,11 @@ export function useAnimation(
     if (rootElSnapshot instanceof HTMLElement) {
       // if this effect is triggered while animating, we need to remove the old month snapshots from the new root snapshot
       const currentMonthElsSnapshot = [
-        ...(rootElSnapshot.querySelectorAll(`[data-month-container]`) ?? [])
+        ...(rootElSnapshot.querySelectorAll(`[data-animated-month]`) ?? [])
       ];
       currentMonthElsSnapshot.forEach((currentMonthElSnapshot) => {
         const previousMonthElSnapshot = currentMonthElSnapshot.querySelector(
-          `[data-month-container]`
+          `[data-animated-month]`
         );
         if (
           previousMonthElSnapshot &&
@@ -86,12 +86,12 @@ export function useAnimation(
     }
 
     const previousMonthEls = [
-      ...(previousRootElSnapshot?.querySelectorAll(`[data-month-container]`) ??
+      ...(previousRootElSnapshot?.querySelectorAll(`[data-animated-month]`) ??
         [])
     ];
 
     const currentMonthEls = [
-      ...(rootElRef.current.querySelectorAll(`[data-month-container]`) ?? [])
+      ...(rootElRef.current.querySelectorAll(`[data-animated-month]`) ?? [])
     ];
 
     if (
@@ -117,23 +117,23 @@ export function useAnimation(
 
         // animate new displayed month
         const captionAnimationClass = isAfterPreviousMonth
-          ? classNames[Animation.animation_enter_month_caption_is_after]
-          : classNames[Animation.animation_enter_month_caption_is_before];
+          ? classNames[Animation.caption_next_in]
+          : classNames[Animation.caption_prev_in];
 
         const weeksAnimationClass = isAfterPreviousMonth
-          ? classNames[Animation.animation_enter_month_weeks_is_after]
-          : classNames[Animation.animation_enter_month_weeks_is_before];
+          ? classNames[Animation.weeks_next_in]
+          : classNames[Animation.weeks_prev_in];
 
         currentMonthEl.style.position = "relative";
         currentMonthEl.style.overflow = "hidden";
         const captionEl = currentMonthEl.querySelector(
-          `[data-month-caption-container]`
+          `[data-animated-caption]`
         );
         if (captionEl && captionEl instanceof HTMLElement) {
           captionEl.classList.add(captionAnimationClass);
         }
 
-        const weeksEl = currentMonthEl.querySelector(`[data-weeks-container]`);
+        const weeksEl = currentMonthEl.querySelector(`[data-animated-weeks]`);
         if (weeksEl && weeksEl instanceof HTMLElement) {
           weeksEl.classList.add(weeksAnimationClass);
         }
@@ -163,32 +163,32 @@ export function useAnimation(
 
         // hide the weekdays container of the old month and only the new one
         const previousWeekdaysEl = previousMonthEl.querySelector(
-          `[data-weekdays-container]`
+          `[data-animated-weekdays]`
         );
         if (previousWeekdaysEl && previousWeekdaysEl instanceof HTMLElement) {
           previousWeekdaysEl.style.opacity = "0";
         }
 
         const previousCaptionEl = previousMonthEl.querySelector(
-          `[data-month-caption-container]`
+          `[data-animated-caption]`
         );
         if (previousCaptionEl && previousCaptionEl instanceof HTMLElement) {
           previousCaptionEl.classList.add(
             isAfterPreviousMonth
-              ? classNames[Animation.animation_exit_month_caption_is_before]
-              : classNames[Animation.animation_exit_month_caption_is_after]
+              ? classNames[Animation.caption_prev_out]
+              : classNames[Animation.caption_next_out]
           );
           previousCaptionEl.addEventListener("animationend", cleanUp);
         }
 
         const previousWeeksEl = previousMonthEl.querySelector(
-          `[data-weeks-container]`
+          `[data-animated-weeks]`
         );
         if (previousWeeksEl && previousWeeksEl instanceof HTMLElement) {
           previousWeeksEl.classList.add(
             isAfterPreviousMonth
-              ? classNames[Animation.animation_exit_month_weeks_is_before]
-              : classNames[Animation.animation_exit_month_weeks_is_after]
+              ? classNames[Animation.weeks_prev_out]
+              : classNames[Animation.weeks_next_out]
           );
         }
 
